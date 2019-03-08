@@ -25,7 +25,7 @@ describe('gamesModule ORM for "games" table', () => {
         it('should return an array that has the length equal to amount of records in "games" table', async () => {
             let getgames = await games.get()
             let gamesdb = await db('games')
-            expect(getgames.length()).toEqual(gamesdb.length())
-        }
+            expect(getgames.length).toEqual(gamesdb.length)
+        })
     })
 })

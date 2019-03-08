@@ -2,7 +2,7 @@ const db = require('../data/dbConfig.js')
 
 module.exports = {
     add,
-    // get,
+    get,
     // getById,
     // remove,
     // modify
@@ -14,3 +14,6 @@ async function add(request) {
 }
 
 
+function get() {
+    return db('games')
+}

@@ -22,4 +22,14 @@ server.post("/api", (req, res) => {
       });
   });
 
+server.get("/api", (req, res) => {
+  db.get()
+  .then(found => {
+    res.status(200).json(found)
+  })
+  .catch(({ code, message }) => {
+    res.status(code).json({ message });
+  });
+})
+
 module.exports = server;
