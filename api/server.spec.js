@@ -43,10 +43,10 @@ describe("GET /", () => {
   })
   it("should return an array", async () => {
     const res = await request(server).get("/api")
-    expect(Array.isArray(res)).toBeTruthy();
+    expect(Array.isArray(res.body)).toBeTruthy();
   })
   it("should return an array containing each database record", async () => {
     const res = await request(server).get("/api")
-    expect(res).toHaveLength(3)
+    expect(res.body).toHaveLength(3)
   })
 })
