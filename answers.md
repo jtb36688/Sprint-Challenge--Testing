@@ -1,0 +1,6 @@
+1. In Jest, what are the differences between `describe()` and `it()` globals, and what are good uses for them?
+In jest, describe() begins a group of test cases, which are represented by a string descriptor as its first argument, and then test cases as following arguments. it() begins a test case which expects a string descritpor as its first arguments, and then a function that represents the test case as its second argument.
+1. What is the point of `Test Driven Development`? What do you think about this approach?
+The TDD process ensures that all important tests are written and suited for that app that is being developed. By creating tests as part of the app, it ensures a more thorough test environment which accounts for all interlocked parts of the app. TDD also allows for testing to occur as the app is created, so that it is easier to tell why a certain test is not giving expected results during a build instead of at the end of a build. I believe a good TDD process is invaluable - when done correctly, it can ensure for fully functional apps which are already set up for future maintenance.
+1. Mention three types of automated tests.
+Unit tests involve testing application logic, integration tests involve testing middleware within a server, snapshot tests involve testing for regressions in a file by comparing it against a saved copy of itself.
