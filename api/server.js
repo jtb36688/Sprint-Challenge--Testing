@@ -13,6 +13,11 @@ server.post("/api", (req, res) => {
       .status(422)
       .json({ error: "Please provide a name and genre for your addition" });
   }
+  db.getByTitle(name).then(found => {
+    if (found.length) {
+      return res.status(405).json({ error: "Title of Entry must be unique" });
+    }
+  });
   db.add(addition)
     .then(add => {
       res.status(201).json(add);
