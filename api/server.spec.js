@@ -13,7 +13,7 @@ describe("POST /", () => {
   afterEach(async () => {
     await db.seed.run()
 })
-  it("should return a status code of 201 on POST", async () => {
+  it("should return a status code of 201 on successful POST", async () => {
     const res = await request(server)
       .post("/api")
       .send({ name: "MTG Arena", genre: "Board/Card" });
@@ -25,5 +25,28 @@ describe("POST /", () => {
       .send({ name: "MTG Arena", genre: "Board/Card" });
     expect(res.type).toBe("application/json");
   });
+  it("should return a status code of 422 on invalid request body (not containing name or genre value)", async () => {
+    const res = await request(server)
+      .post("/api")
+      .send({ name: "MTG Arena"});
+    expect(res.status).toBe(422);
+    const res2 = await request(server)
+    .post("/api")
+    .send({ genre: "Board/Card"});
+    expect(res2.status).toBe(422);
+  })
 });
-
+describe("GET /", () => {
+  it("should return a status code of 200 on successful GET", async () => {
+    const res = await request(server).get("/api")
+    expect(res.status).toBe(200)
+  })
+  it("should return an array", async () => {
+    const res = await request(server).get("/api")
+    expect(Array.isArray(res)).toBeTruthy();
+  })
+  it("should return an array containing each database record", async () => {
+    const res = await request(server).get("/api")
+    expect(res).toHaveLength(3)
+  })
+})
