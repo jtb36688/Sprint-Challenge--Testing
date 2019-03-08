@@ -11,8 +11,8 @@ describe("server.js", () => {
 });
 describe("POST /", () => {
   afterEach(async () => {
-    await db("games").truncate();
-  });
+    await db.seed.run()
+})
   it("should return a status code of 201 on POST", async () => {
     const res = await request(server)
       .post("/api")

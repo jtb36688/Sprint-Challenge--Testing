@@ -3,22 +3,22 @@ const db = require('../data/dbConfig.js')
 const games = require('./gamesModule.js')
 
 describe('gamesModule', () => {
-    describe('insert()', () => {
+    describe('add()', () => {
         afterEach(async () => {
-            await db('games').truncate()
+            await db.seed.run()
         })
-        it('should insert the provided game into the db', async () => {
-            let game = await games.insert({name: 'sam'})
-            expect(game.name).toBe('sam')
-            game = await games.insert({name: 'Minecraft'})
-            expect(game.name).toBe('Minecraft')
+        it('should add the provided game into the db', async () => {
+            let game = await games.add({name: 'Super Mario Bros.', genre: "Platformer"})
+            expect(game.genre).toBe('Platformer')
+            let game2 = await games.add({name: 'Minecraft', genre: 'Adventure'})
+            expect(game2.name).toBe('Minecraft')
         })
-        it('should insert the provided amount of games into the db', async () => {
-            await games.insert({name: 'Super Mario RPG: Legend of the Seven Stars'})
-            await games.insert({name: 'Minecraft'})
-            await games.insert({name: 'Enter the Gungeon'})
+        it('should add the provided amount of games into the db', async () => {
+            await games.add({name: 'Super Mario RPG: Legend of the Seven Stars', genre: 'RPG'})
+            await games.add({name: 'Minecraft', genre: 'Adventure'})
+            await games.add({name: 'Enter the Gungeon', genre: 'Shooter'})
             const gamesdb = await db('games')
-            expect(gamesdb).toHaveLength(3)
+            expect(gamesdb).toHaveLength(6)
         })
     })
 })

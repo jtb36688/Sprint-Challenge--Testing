@@ -8,7 +8,9 @@ module.exports = {
     // modify
 }
 
-function add( request) {
-    return db('games').insert(request)
+async function add(request) {
+    const [id] = await db('games').insert(request)
+    return db('games').where({id}).first();
 }
+
 
