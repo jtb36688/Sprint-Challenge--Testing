@@ -35,6 +35,12 @@ describe("POST /", () => {
     .send({ genre: "Board/Card"});
     expect(res2.status).toBe(422);
   })
+  it("should return a status code of 405 when trying to add a title that is not unique amongst records", async () => {
+    const res = await request(server)
+    .post("/api")
+    .send({name: 'Metroid', genre: "Adventure"})
+    expect(res.status).toBe(405);
+  })
 });
 describe("GET /", () => {
   it("should return a status code of 200 on successful GET", async () => {
@@ -47,6 +53,7 @@ describe("GET /", () => {
   })
   it("should return an array containing each database record", async () => {
     const res = await request(server).get("/api")
-    expect(res.body).toHaveLength(3)
+    const dbget = await db('games')
+    expect(res.body).toHaveLength(dbget.length)
   })
 })
