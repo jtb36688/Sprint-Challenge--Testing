@@ -35,7 +35,7 @@ describe("POST /", () => {
     .send({ genre: "Board/Card"});
     expect(res2.status).toBe(422);
   })
-  it("should return a status code of 405 when trying to add a title that is not unique amongst records", async () => {
+  it.skip("should return a status code of 405 when trying to add a title that is not unique amongst records", async () => {
     const res = await request(server)
     .post("/api")
     .send({name: 'Metroid', genre: "Adventure"})
